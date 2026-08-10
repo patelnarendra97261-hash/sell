@@ -1,0 +1,6 @@
+{
+  "name": "Sales ",
+  "description": "Manage liquor inventory, dynamic pricing, shopkeeper sales logging, credit (udhar) management, daily expenses & profit-loss reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

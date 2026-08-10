@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073787443769",
+    "project_id": "storemy-98964",
+    "storage_bucket": "storemy-98964.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073787443769:android:ac8e2706897e8ee4254be8",
+        "android_client_info": {
+          "package_name": "com.aistudio.liquorinventory.vzkqmn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1FUiS6-XJumXCVWp5T56dI4fDUK_faCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

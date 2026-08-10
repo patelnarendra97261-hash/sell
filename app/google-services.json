@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "68226052001",
+    "project_id": "dixit-14de0",
+    "firebase_url": "https://dixit-14de0-default-rtdb.firebaseio.com",
+    "storage_bucket": "dixit-14de0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68226052001:android:2f7581a5aa90370a3ca5e0",
+        "android_client_info": {
+          "package_name": "com.dixit.sell"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0VFbYFuVNPWN4VIdS9S05iqsDVWt7Ty0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
