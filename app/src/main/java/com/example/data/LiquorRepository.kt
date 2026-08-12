@@ -1,4 +1,4 @@
-package com.example.data //
+package com.example.data // <-- અહીં જો તમારું અલગ પેકેજ હોય તો તે નામ લખવું
 
 import android.content.Context
 import android.os.Build
@@ -326,6 +326,51 @@ class LiquorRepository(private val context: Context) {
         realtimeDb?.getReference("udhar")?.child(creditId)?.setValue(updatedCredit)
 
         return Result.success(if (remainingAmount > 0) remainingAmount else 0.0)
+    }
+
+    // --- ૩. ADD OR UPDATE UDHAR LOGIC ---
+    fun addOrUpdateUdhar(customerName: String, customerPhone: String, newAmount: Double, itemSummary: String) {
+        val currentList = _credits.value.toMutableList()
+        
+        // ૧. ચેક કરો કે આ ફોન નંબરથી PENDING ઉધાર છે કે નહીં
+        val existingIndex = currentList.indexOfFirst { 
+            it.customerPhone == customerPhone && it.status == UdharStatus.PENDING 
+        }
+
+        if (existingIndex != -1) {
+            // ૨. જૂનું ઉધાર હોય તો રકમ અને સામગ્રી ઉમેરો
+            val existingCredit = currentList[existingIndex]
+            val updatedCredit = existingCredit.copy(
+                amount = existingCredit.amount + newAmount,
+                itemSummary = "${existingCredit.itemSummary}, $itemSummary",
+                timestamp = System.currentTimeMillis()
+            )
+            currentList[existingIndex] = updatedCredit
+            
+            // Firebase Update
+            realtimeDb?.getReference("udhar")?.child(existingCredit.id)?.setValue(updatedCredit)
+        } else {
+            // ૩. નવો ગ્રાહક હોય તો નવી એન્ટ્રી બનાવો
+            val newCredit = CreditEntry(
+                id = UUID.randomUUID().toString(),
+                timestamp = System.currentTimeMillis(),
+                dateString = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date()),
+                customerName = customerName,
+                customerPhone = customerPhone,
+                amount = newAmount,
+                shopkeeperName = "",
+                saleId = "",
+                itemSummary = itemSummary,
+                status = UdharStatus.PENDING,
+                settledTimestamp = null
+            )
+            currentList.add(newCredit)
+            
+            // Firebase Save
+            realtimeDb?.getReference("udhar")?.child(newCredit.id)?.setValue(newCredit)
+        }
+
+        _credits.value = currentList.sortedByDescending { it.timestamp }
     }
 
     // --- Local Cache Helpers ---
